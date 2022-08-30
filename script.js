@@ -163,9 +163,12 @@ var modelLoaded = false;
      //console.log(input)
      //making the prediction and adding the prediction it to the output canvas
     
+     if (modelLoaded!==true){
+        cv.putText(dst,"Cargando modelo",{x:face.x,y:face.y-60},1,3,[100, 255, 100, 255],4);
+    }
      
      try{
-        let input = tf.tensor(crop.data, [1, crop.rows, crop.cols, 3])//.div(255);
+        /*let input = tf.tensor(crop.data, [1, crop.rows, crop.cols, 3])//.div(255);
         predictions=model.predict(input);
         console.log("Predicciones")
         console.log(predictions)
@@ -176,14 +179,7 @@ var modelLoaded = false;
             ", "+ String( dataset_dict['hair_id'][parseInt(predictions[3].dataSync())])+
             ", "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())])+
             ", "+ String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())])
-        );
-                /*console.log("Edad: "+ String(dataset_dict['age_id'][parseInt(predictions[0].dataSync())])+
-        ", Exp: "+ String( dataset_dict['expression_id'][parseInt(predictions[1].dataSync())])+
-        ", Genero: "+ String( dataset_dict['gender_id'][parseInt(predictions[2].dataSync())])+
-        ", Cabello: "+ String( dataset_dict['hair_id'][parseInt(predictions[3].dataSync())])+
-        ", Calvo: "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())])+
-        ", Gafas: "+ String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())]))*/
-         //console.log(predictions[0].dataSync())
+        );//console.log(predictions[0].dataSync())
          //adding the text above the bounding boxes
          
          cv.putText(dst,
@@ -200,7 +196,7 @@ var modelLoaded = false;
 
         cv.putText(dst,
             String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())]),
-            {x:face.x-60,y:face.y-50},1,2,[100, 255, 100, 255],2);
+            {x:face.x-60,y:face.y-50},1,2,[100, 255, 100, 255],2);*/
         
     }catch(err){
         if (modelLoaded==true){
