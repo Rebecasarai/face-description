@@ -1,9 +1,6 @@
 var model;
 var tts;
 
-
-
-
 const dataset_dict = {
     'age_id': {
         0: '0-15',
@@ -42,23 +39,19 @@ const dataset_dict = {
 }
 
 let predictions= '';
-let video;
 
 //openCvReady is the function that will be executed when the opencv.js file is loaded
 function openCvReady() {
   cv['onRuntimeInitialized']= ()=>{
     // The variable video extracts the video the video element
-    video = document.getElementById("cam_input"); // video is the id of video tag
-
-
-    // Fix for iOS Safari from https://leemartin.dev/hello-webrtc-on-safari-11-e8bcb5335295
-    video.setAttribute('autoplay', '');
-    video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '')
+    let video = document.getElementById("cam_input"); // video is the id of video tag
     // navigator.mediaDevices.getUserMedia is used to access the webcam
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function(stream) {
         video.srcObject = stream;
+        video.setAttribute('autoplay', '');
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
         video.play();
     })
     .catch(function(err) {  
@@ -122,7 +115,7 @@ var modelLoaded = false;
 (async () => {
     this.tts=createTts()
     speak(this.tts, "Cargando modelo");
-    model = await tf.loadLayersModel('./model/latest_29_08_2022_2_2_quantize_uint8/model.json')//.then(() => {
+    model = await tf.loadLayersModel('./model/latest_29_08_2022_2_2_quantize_float16/model.json')//.then(() => {
         
     console.log(tf.getBackend());
     //tf.setBackend('cpu');
@@ -173,9 +166,6 @@ var modelLoaded = false;
      //console.log(input)
      //making the prediction and adding the prediction it to the output canvas
     
-     if (modelLoaded!==true){
-        cv.putText(dst,"Cargando modelo",{x:face.x,y:face.y-60},1,3,[100, 255, 100, 255],4);
-    }
      
      try{
         let input = tf.tensor(crop.data, [1, crop.rows, crop.cols, 3])//.div(255);
@@ -189,7 +179,14 @@ var modelLoaded = false;
             ", "+ String( dataset_dict['hair_id'][parseInt(predictions[3].dataSync())])+
             ", "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())])+
             ", "+ String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())])
-        );//console.log(predictions[0].dataSync())
+        );
+                /*console.log("Edad: "+ String(dataset_dict['age_id'][parseInt(predictions[0].dataSync())])+
+        ", Exp: "+ String( dataset_dict['expression_id'][parseInt(predictions[1].dataSync())])+
+        ", Genero: "+ String( dataset_dict['gender_id'][parseInt(predictions[2].dataSync())])+
+        ", Cabello: "+ String( dataset_dict['hair_id'][parseInt(predictions[3].dataSync())])+
+        ", Calvo: "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())])+
+        ", Gafas: "+ String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())]))*/
+         //console.log(predictions[0].dataSync())
          //adding the text above the bounding boxes
          
          cv.putText(dst,
