@@ -32,32 +32,32 @@
       align-items: center;
     }
 
-#cam_input{
+/*#cam_input{
     height: 680px;
     width: 900px;
-}
+}*/
 
 @media (max-width: 600px) {
 #cam_input {
-    width: 100vw;
-    height: 100vh;
+    width: 100vw !important;
+    height: 100vh!important;
     position: fixed;
     object-fit: cover;
 }
 
 canvas {
-    width: 100vw;
-    height: 100vh;
+    /*width: 100vw!important;
+    height: 100vh!important;
     position: fixed;
-    object-fit: cover;
+    object-fit: cover;*/
 
 }
 }
     </style>
 </head>
 <body>
-    <!--<video id="cam_input" height="680" width="900"></video>-->
-    <video id="cam_input"></video>
+    <video id="cam_input" height="680" width="900"></video>
+    <!--<video id="cam_input"></video>-->
     <canvas id="canvas_output"></canvas>
     <script type="text/JavaScript" src="script.js"></script>
     <!-- <h2 id="output">Initializing</h2> -->
