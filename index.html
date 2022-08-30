@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente para invidentes</title>
+    <script src="js/utils.js"></script>
+    <script async src="js/opencv.js" onload="openCvReady();"></script>
+   
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/3.19.0/tf.node.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/3.19.0/tf.node.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/3.20.0/tf.min.js"></script>    
+    
+    <style>
+        canvas {
+      position: absolute;
+    }
+    h2{
+        position: relative;
+        top: -250px;
+        right: 350;
+    }
+    body {
+      margin: 0;
+      background-color: whitesmoke;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 576px) {
+    video {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    canvas {
+        max-width: 80%;
+        max-height: 80%;
+
+    }
+}
+    </style>
+</head>
+<body>
+    <video id="cam_input" height="680" width="900"></video>
+    <canvas id="canvas_output"></canvas>
+    <script type="text/JavaScript" src="script.js"></script>
+    <!-- <h2 id="output">Initializing</h2> -->
+</body>
+
+</html>
