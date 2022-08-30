@@ -1,6 +1,9 @@
 var model;
 var tts;
 
+
+
+
 const dataset_dict = {
     'age_id': {
         0: '0-15',
@@ -39,12 +42,19 @@ const dataset_dict = {
 }
 
 let predictions= '';
+let video;
 
 //openCvReady is the function that will be executed when the opencv.js file is loaded
 function openCvReady() {
   cv['onRuntimeInitialized']= ()=>{
     // The variable video extracts the video the video element
-    let video = document.getElementById("cam_input"); // video is the id of video tag
+    video = document.getElementById("cam_input"); // video is the id of video tag
+
+
+    // Fix for iOS Safari from https://leemartin.dev/hello-webrtc-on-safari-11-e8bcb5335295
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '')
     // navigator.mediaDevices.getUserMedia is used to access the webcam
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function(stream) {
@@ -168,7 +178,7 @@ var modelLoaded = false;
     }
      
      try{
-        /*let input = tf.tensor(crop.data, [1, crop.rows, crop.cols, 3])//.div(255);
+        let input = tf.tensor(crop.data, [1, crop.rows, crop.cols, 3])//.div(255);
         predictions=model.predict(input);
         console.log("Predicciones")
         console.log(predictions)
@@ -196,7 +206,7 @@ var modelLoaded = false;
 
         cv.putText(dst,
             String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())]),
-            {x:face.x-60,y:face.y-50},1,2,[100, 255, 100, 255],2);*/
+            {x:face.x-60,y:face.y-50},1,2,[100, 255, 100, 255],2);
         
     }catch(err){
         if (modelLoaded==true){
