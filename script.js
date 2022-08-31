@@ -63,8 +63,8 @@ function openCvReady() {
                 this.video_height=height;
 
                 if (height>width){
-                    this.video_width=video.offsetWidth;
-                    this.video_height=video.offsetHeight;
+                    this.video_width=video.clientHeight;
+                    this.video_height=video.clientWidth;
                 }
             })
             .catch(function(err) {
