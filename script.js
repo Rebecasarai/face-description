@@ -75,8 +75,10 @@ function openCvReady() {
             
         }else{
             
-            this.video_height=320;
-            this.video_width=240;
+            //this.video_height=320;
+            //this.video_width=240;
+            this.video_height=video.clientHeight;
+            this.video_width=video.clientWidth;
         }
         
         console.log(this.video_width);
