@@ -45,13 +45,15 @@ function openCvReady() {
   cv['onRuntimeInitialized']= ()=>{
     // The variable video extracts the video the video element
     let video = document.getElementById("cam_input"); // video is the id of video tag
+    
     // navigator.mediaDevices.getUserMedia is used to access the webcam
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function(stream) {
         video.srcObject = stream;
-        video.setAttribute('autoplay', '');
+        
+        /*video.setAttribute('autoplay', '');
         video.setAttribute('muted', '');
-        video.setAttribute('playsinline', '');
+        video.setAttribute('playsinline', '');*/
         video.play();
     })
     .catch(function(err) {  
@@ -115,7 +117,7 @@ var modelLoaded = false;
 (async () => {
     this.tts=createTts()
     speak(this.tts, "Cargando modelo");
-    model = await tf.loadLayersModel('./model/latest_29_08_2022_2_2_quantize_float16/model.json')//.then(() => {
+    model = await tf.loadLayersModel('./model/latest_29_08_2022_2_2_quantize_uint8/model.json')//.then(() => {
         
     console.log(tf.getBackend());
     //tf.setBackend('cpu');

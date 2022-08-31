@@ -1,11 +1,12 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asistente para invidentes</title>
     <script src="js/utils.js"></script>
-    <!--<script async src="js/opencv.js" onload="openCvReady();"></script>-->
-    <script async src="js/opencv.js" onload="openCvReady();" type="text/javascript"></script>
+    
+    
    
 
     <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>-->
@@ -33,36 +34,31 @@
       align-items: center;
     }
 
-/*#cam_input{
-    height: 680px;
-    width: 900px;
-}*/
-
-@media (max-width: 600px) {
-#cam_input {
-    /*width: 90vw !important;
-    height: 90vh!important;
-    position: fixed;
-    object-fit: cover;*/
-}
-
-canvas {
-    /*width: 100vw!important;
-    height: 100vh!important;
-    position: fixed;
-    object-fit: cover;*/
-}
-    
-
-}
+    #cam_input{
+        height: 100%!important;
+        width: 100% !important;
+    }
 
     </style>
 </head>
 <body>
-    <video id="cam_input" height="680" width="900"></video>
-    <!--<video id="cam_input"></video>-->
-    <canvas id="canvas_output"></canvas>
+    <video id="cam_input" height="690" width="900" autoplay muted playsinline></video>
+    
+    <!--<script>
+        console.log('page is fully loaded');
+        const newVideo = document.createElement("video");
+        newVideo.setAttribute("id",'cam_input');
+        newVideo.setAttribute("height",window.innerHeight);
+        newVideo.setAttribute("width",window.innerHeight);
+        newVideo.onload = function() {myFunction()};
+
+    </script>-->
+    <canvas id="canvas_output" height="690" width="900" ></canvas>
+
+    
     <script type="text/JavaScript" src="script.js"></script>
+    <!--<script src="js/opencv.js" onload="openCvReady();"></script>-->
+    <script src="js/opencv.js" onload="openCvReady();"></script>
     <!-- <h2 id="output">Initializing</h2> -->
 </body>
 
