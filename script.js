@@ -49,9 +49,22 @@ function openCvReady() {
   cv['onRuntimeInitialized']= ()=>{
     // The variable video extracts the video the video element
     let video = document.getElementById("cam_input"); // video is the id of video tag
+
+    const constraints = {
+        //'qvga': {width: {exact: 320}, height: {exact: 240}},
+        //'vga': {width: {exact: 640}, height: {exact: 480}}};
+        
+         width: { min: 160, ideal: 640, max: 640 },
+         height: { min: 240, ideal: 480, max: 480 }
+    };
+
+    /*let videoConstraint = constraints[resolution];
+    if (!videoConstraint) {
+        videoConstraint = true;
+    }*/
     
 
-    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+    navigator.mediaDevices.getUserMedia({video: constraints, audio: false})
             .then(function(stream) {
                 console.log("ENTRAAA");
                 let {width, height} = stream.getTracks()[0].getSettings();
@@ -63,8 +76,8 @@ function openCvReady() {
                 this.video_height=height;
 
                 if (height>width){
-                    this.video_width=video.clientHeight;
-                    this.video_height=video.clientWidth;
+                    this.video_width=480;
+                    this.video_height=640;
                 }
             })
             .catch(function(err) {
