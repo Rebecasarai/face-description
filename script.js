@@ -50,47 +50,39 @@ function openCvReady() {
     // The variable video extracts the video the video element
     let video = document.getElementById("cam_input"); // video is the id of video tag
     
+
+    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+            .then(function(stream) {
+                console.log("ENTRAAA");
+                let {width, height} = stream.getTracks()[0].getSettings();
+                
+                console.log(`${width}x${height}`); // 640x480
+
+
+                this.video_width=width;
+                this.video_height=height;
+
+                if (height>width){
+                    this.video_width=video.offsetWidth;
+                    this.video_height=video.offsetHeight;
+                }
+            })
+            .catch(function(err) {
+                self.printError('Camera Error: ' + err.name + ' ' + err.message);
+            });
+
+    console.log(this.video_width);
+    console.log(this.video_height );
+
+    //let c = document.getElementById("canvas_output");
+    video.setAttribute('height',this.video_height);
+    video.setAttribute('width',this.video_width);
+
+
     // navigator.mediaDevices.getUserMedia is used to access the webcam
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function(stream) {
         video.srcObject = stream;
-        let {width, height} = stream.getTracks()[0].getSettings();
-        console.log(`${width}x${height}`); // 640x480
-
-        console.log(width);
-        console.log(height );
-        console.log("offset "+video.offsetWidth);
-        console.log("width "+video.width);
-        console.log("clientWidth "+video.clientWidth);
-        console.log("scrollWidth "+video.scrollWidth);
-
-        this.video_width=video.offsetWidth;
-        this.video_height=video.offsetHeight;
-
-        if (width>height) {
-            /*this.video_width=width;
-            this.video_height=height;*/
-            this.video_width=video.offsetWidth;
-            this.video_height=video.offsetHeight;
-            
-        }else{
-            
-            //this.video_height=320;
-            //this.video_width=240;
-            this.video_height=video.clientHeight;
-            this.video_width=video.clientWidth;
-        }
-        
-        console.log(this.video_width);
-        console.log(this.video_height );
-
-        video.setAttribute('height',this.video_height);
-        video.setAttribute('width',this.video_width);
-
-        
-        //video.setAttribute('height',this.video_height);
-        //video.setAttribute('width',this.video_width);
-
         
         /*video.setAttribute('autoplay', '');
         video.setAttribute('muted', '');
@@ -100,12 +92,6 @@ function openCvReady() {
     .catch(function(err) {  
         console.log("An error occurred! " + err);
     });
-
-   
-    setTimeout(openCvReady, 2000);
-
-    //let c = document.getElementById("canvas_output");
-    
 
     //src and dst holds the source and destination image matrix
     let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
@@ -285,7 +271,7 @@ window.addEventListener("click", function(event) {
     if (predictions !== ''){
         texto = String(dataset_dict['gender_id'][parseInt(predictions[2].argMax(1).dataSync())])+
         " de "+ String(dataset_dict['age_id'][parseInt(predictions[0].argMax(1).dataSync())]) +
-        ", " + String(dataset_dict['expression_id'][parseInt(predictions[1].argMax(1).dataSync())]) +", con " +       
+        ", " + String(dataset_dict['expression_id'][parseInt(predictions[1].argMax(1).dataSync())]) +", con "        +
         String( dataset_dict['hair_id'][parseInt(predictions[3].dataSync())])+
         ", "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())]) +", "
         String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())])
