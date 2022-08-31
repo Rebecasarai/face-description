@@ -45,7 +45,11 @@ function openCvReady() {
   cv['onRuntimeInitialized']= ()=>{
     // The variable video extracts the video the video element
     let video = document.getElementById("cam_input"); // video is the id of video tag
-    
+    let c = document.getElementById("canvas_output");
+    video.setAttribute('height',690);
+    video.setAttribute('width',window.innerWidth);
+    c.setAttribute('height',690);
+    c.setAttribute('width',window.innerWidth);
     // navigator.mediaDevices.getUserMedia is used to access the webcam
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function(stream) {
