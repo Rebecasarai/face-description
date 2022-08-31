@@ -67,20 +67,23 @@ function openCvReady() {
         this.video_width=video.offsetWidth;
         this.video_height=video.offsetHeight;
 
-        /*if (width>height) {
+        if (width>height) {
             /*this.video_width=width;
             this.video_height=height;*/
-            /*this.video_width=video.offsetWidth;
+            this.video_width=video.offsetWidth;
             this.video_height=video.offsetHeight;
             
         }else{
             
             this.video_height=320;
             this.video_width=240;
-        }*/
+        }
         
         console.log(this.video_width);
         console.log(this.video_height );
+
+        video.setAttribute('height',this.video_height);
+        video.setAttribute('width',this.video_width);
 
         
         //video.setAttribute('height',this.video_height);
@@ -100,8 +103,7 @@ function openCvReady() {
     setTimeout(openCvReady, 2000);
 
     //let c = document.getElementById("canvas_output");
-    video.setAttribute('height',this.video_height);
-    video.setAttribute('width',this.video_width);
+    
 
     //src and dst holds the source and destination image matrix
     let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
