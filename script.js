@@ -64,6 +64,11 @@ function openCvReady() {
     }*/
     
 
+    var ratio = window.devicePixelRatio || 1;
+    var w = screen.width * ratio;
+    var h = screen.height * ratio;
+    console.log("wxh: "+ w + " "+ h);
+
     navigator.mediaDevices.getUserMedia({video: constraints, audio: false})
             .then(function(stream) {
                 console.log("ENTRAAA");
@@ -75,7 +80,9 @@ function openCvReady() {
                 this.video_width=width;
                 this.video_height=height;
 
-                if (height>width){
+                
+
+                if (h>w){
                     this.video_width=480;
                     this.video_height=640;
                 }
