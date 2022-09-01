@@ -101,10 +101,10 @@ function openCvReady() {
     console.log("scrollWidth "+video.scrollWidth);
     var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     console.log("width: "+w);
-    if (w < 700){
+    /*if (w < 700){
         this.video_width=480;
         this.video_height=640;
-    }
+    }*/
 
     console.log(this.video_width);
     console.log(this.video_height );
