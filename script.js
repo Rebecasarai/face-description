@@ -205,8 +205,8 @@ var modelLoaded = false;
          let face = faces.get(i);
          // filtering out the boxes with the area of less than 45000
          if(face.width*face.height <40000){continue;} 
-         let point1 = new cv.Point(face.x-10, face.y-40);
-         let point2 = new cv.Point(face.x + face.width+10, face.y-40 + face.height+40);
+         let point1 = new cv.Point(face.x, face.y-40);
+         let point2 = new cv.Point(face.x + face.width, face.y-40 + face.height+60);
          //console.log(point1, point2);
          // creating the bounding box
          cv.rectangle(dst, point1, point2, [100, 255, 100, 255],3);
