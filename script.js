@@ -90,16 +90,16 @@ function openCvReady() {
                 video.clientWidth+"x"+video.clientHeight+".  scrollWidth x scrollHeight:"+
                 video.scrollWidth+"x"+video.scrollHeight);
 
-        if (w < 700){
+        /*if (w < 700){
             //this.video_width=480;
             //this.video_height=640;
             video.setAttribute('width', 480);
             video.setAttribute('height', 640);
-        }else{
+        }else{*/
             video.setAttribute('width', width);
             video.setAttribute('height', height);
 
-        }
+        //}
         video.play();
             
         setTimeout(openCvReady, 3000);
