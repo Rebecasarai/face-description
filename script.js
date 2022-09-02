@@ -88,7 +88,7 @@ function openCvReady() {
         console.log("width: "+w);
         alert("wxh:"+ w+"x"+h+".  clientWidth x clientHeight:"+
                 video.clientWidth+"x"+video.clientHeight+".  scrollWidth x scrollHeight:"+
-                video.scrollWidth+"x"+video.scrollHeight);
+                video.scrollWidth+"x"+video.scrollHeight +".\n cameraWidth x cameraHeight:"+width+"x"+height);
 
         /*if (w < 700){
             //this.video_width=480;
