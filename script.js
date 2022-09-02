@@ -49,7 +49,28 @@ var video_height=680;
 function openCvReady() {
   cv['onRuntimeInitialized']= ()=>{
     // The variable video extracts the video the video element
-    let video = document.getElementById("cam_input"); // video is the id of video tag
+    //let video = document.getElementById("cam_input"); // video is the id of video tag
+    let video = document.createElement('video');
+    //video id="cam_input" height="100%" width="100%" autoplay muted playsinline
+    video.setAttribute('id', 'cam_input');
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    //video.setAttribute('height', '100%');
+    //video.setAttribute('width', '100%');
+
+    let canvas = document.createElement('canvas');
+    canvas.setAttribute('id', 'canvas_output');
+
+    document.body.append(video);
+    document.body.append(canvas);
+    
+    
+    /*console.log("offset "+video.offsetWidth);
+    console.log("width "+video.width);
+    console.log("clientWidth "+video.clientWidth);
+    console.log("scrollWidth "+video.scrollWidth);*/
+    
     
     // navigator.mediaDevices.getUserMedia is used to access the webcam
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
@@ -61,63 +82,68 @@ function openCvReady() {
         console.log(width);
         console.log(height );
 
-        //this.video_width=video.offsetWidth;
-        //this.video_height=video.offsetHeight;
-        this.video_width=width;
-        this.video_height=height;
 
-        /*if (width>height) {
-            /*this.video_width=width;
-            this.video_height=height;*/
-            /*this.video_width=video.offsetWidth;
-            this.video_height=video.offsetHeight;
-            
+        var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        var h = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+        console.log("width: "+w);
+        alert("wxh:"+ w+"x"+h+".  clientWidth x clientHeight:"+
+                video.clientWidth+"x"+video.clientHeight+".  scrollWidth x scrollHeight:"+
+                video.scrollWidth+"x"+video.scrollHeight);
+
+        if (w < 700){
+            //this.video_width=480;
+            //this.video_height=640;
+            video.setAttribute('width', 480);
+            video.setAttribute('height', 640);
         }else{
-            
-            this.video_height=320;
-            this.video_width=240;
-        }*/
-        
-        //console.log(this.video_width);
-        //console.log(this.video_height );
+            video.setAttribute('width', width);
+            video.setAttribute('height', height);
 
-        //video.setAttribute('height',this.video_height);
-        //video.setAttribute('width',this.video_width);
-
-        
-        /*video.setAttribute('autoplay', '');
-        video.setAttribute('muted', '');
-        video.setAttribute('playsinline', '');*/
+        }
         video.play();
+            
+        setTimeout(openCvReady, 3000);
+        continueOpenCV(video);
     })
     .catch(function(err) {  
         console.log("An error occurred! " + err);
     });
-
-    
-    console.log("offset "+video.offsetWidth);
-    console.log("width "+video.width);
-    console.log("clientWidth "+video.clientWidth);
-    console.log("scrollWidth "+video.scrollWidth);
-    var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-    console.log("width: "+w);
-    if (w < 700){
-        this.video_width=video.clientWidth;
-        this.video_height=video.clientHeight;
-    }
-
-    console.log(this.video_width);
-    console.log(this.video_height );
-
-    //let c = document.getElementById("canvas_output");
-    video.setAttribute('height',this.video_height);
-    video.setAttribute('width',this.video_width);
-
    
-    setTimeout(openCvReady, 2000);
+  }
 
+}
+
+
+/**
+ * Creates the web native text to speak interface
+ * @returns object for text to speak
+ */
+ function createTts(){
+    var msg = new SpeechSynthesisUtterance();
+    msg.lang = 'es-ES';
+    return msg
+}
+/**
+ * Speaks given a text message
+ * @param {*} tts Text to speak object
+ * @param {*} msgText Text to be speaked outload.
+ */
+function speak(tts, msgText){
+    if ('speechSynthesis' in window) {
+        
+        // Speech Synthesis supported 
+        tts.text = msgText;        
+        window.speechSynthesis.lang = 'es-ES';
+        window.speechSynthesis.speak(tts);
+       }else{
+         // Speech Synthesis Not Supported 
+         alert("¡Lo sentimos, su navegador no admite texto a voz!");
+       }
+}
     
 
+
+function continueOpenCV(video){
     //src and dst holds the source and destination image matrix
     let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
     let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
@@ -142,32 +168,6 @@ function openCvReady() {
     classifier.load(faceCascadeFile); // in the callback, load the cascade from file 
 });
 
-/**
- * Creates the web native text to speak interface
- * @returns object for text to speak
- */
-function createTts(){
-    var msg = new SpeechSynthesisUtterance();
-    msg.lang = 'es-ES';
-    return msg
-}
-/**
- * Speaks given a text message
- * @param {*} tts Text to speak object
- * @param {*} msgText Text to be speaked outload.
- */
-function speak(tts, msgText){
-    if ('speechSynthesis' in window) {
-        
-        // Speech Synthesis supported 
-        tts.text = msgText;        
-        window.speechSynthesis.lang = 'es-ES';
-        window.speechSynthesis.speak(tts);
-       }else{
-         // Speech Synthesis Not Supported 
-         alert("¡Lo sentimos, su navegador no admite texto a voz!");
-       }
-}
 
 /**Loading the model with async as loading the model may take few miliseconds
    The function dont take and return anything the model holds the model**/
@@ -206,7 +206,7 @@ var modelLoaded = false;
          // filtering out the boxes with the area of less than 45000
          if(face.width*face.height <40000){continue;} 
          let point1 = new cv.Point(face.x-10, face.y-40);
-         let point2 = new cv.Point(face.x + face.width+10, face.y-40 + face.height+80);
+         let point2 = new cv.Point(face.x + face.width+10, face.y-40 + face.height+40);
          //console.log(point1, point2);
          // creating the bounding box
          cv.rectangle(dst, point1, point2, [100, 255, 100, 255],3);
@@ -253,24 +253,24 @@ var modelLoaded = false;
             String(dataset_dict['gender_id'][parseInt(predictions[2].argMax(1).dataSync())])+
             " de "+ String(dataset_dict['age_id'][parseInt(predictions[0].argMax(1).dataSync())]) +
             " " + String(dataset_dict['expression_id'][parseInt(predictions[1].argMax(1).dataSync())]) +", ",
-            {x:face.x-60,y:face.y-110},1,2,[100, 255, 100, 255],2);
+            {x:face.x-60,y:face.y-110},1,1,[100, 255, 100, 255],1);
             
             
         cv.putText(dst,   
             String( dataset_dict['hair_id'][parseInt(predictions[3].dataSync())])+
             ", "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())]) +", ",
-            {x:face.x-60,y:face.y-80},1,2,[100, 255, 100, 255],2);
+            {x:face.x-60,y:face.y-80},1,1,[100, 255, 100, 255],1);
 
         cv.putText(dst,
             String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())]),
-            {x:face.x-60,y:face.y-50},1,2,[100, 255, 100, 255],2);
+            {x:face.x-60,y:face.y-50},1,1,[100, 255, 100, 255],1);
         
     }catch(err){
         if (modelLoaded==true){
             console.log(err);
             
         }else{
-            cv.putText(dst,"Cargando modelo",{x:face.x,y:face.y-60},1,3,[100, 255, 100, 255],4);
+            cv.putText(dst,"Cargando modelo",{x:face.x,y:face.y-60},1,1,[100, 255, 100, 255],1);
         }
     }
      
@@ -286,7 +286,6 @@ var modelLoaded = false;
 }
 // schedule first one.
 setTimeout(processVideo, 0);
-};
 }
 
 
