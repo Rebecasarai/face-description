@@ -90,16 +90,16 @@ function openCvReady() {
                 video.clientWidth+"x"+video.clientHeight+".  scrollWidth x scrollHeight:"+
                 video.scrollWidth+"x"+video.scrollHeight +".\n cameraWidth x cameraHeight:"+width+"x"+height);
 
-        /*if (w < 700){
+        if (w < 700){
             //this.video_width=480;
             //this.video_height=640;
-            video.setAttribute('width', 480);
-            video.setAttribute('height', 640);
-        }else{*/
+            video.setAttribute('width', 240);
+            video.setAttribute('height', 320);
+        }else{
             video.setAttribute('width', width);
             video.setAttribute('height', height);
 
-        //}
+        }
         video.play();
             
         setTimeout(openCvReady, 3000);
@@ -175,7 +175,7 @@ var modelLoaded = false;
 (async () => {
     this.tts=createTts()
     speak(this.tts, "Cargando modelo");
-    model = await tf.loadLayersModel('./model/latest_30_08_2022_6_quantize_float16/model.json')//.then(() => {
+    model = await tf.loadLayersModel('./model/latest_31_08_2022_9_quantize_float16/model.json')//.then(() => {
         
     console.log(tf.getBackend());
     //tf.setBackend('cpu');
