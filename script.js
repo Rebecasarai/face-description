@@ -253,17 +253,17 @@ var modelLoaded = false;
             String(dataset_dict['gender_id'][parseInt(predictions[2].argMax(1).dataSync())])+
             " de "+ String(dataset_dict['age_id'][parseInt(predictions[0].argMax(1).dataSync())]) +
             " " + String(dataset_dict['expression_id'][parseInt(predictions[1].argMax(1).dataSync())]) +", ",
-            {x:face.x-60,y:face.y-110},1,1,[100, 255, 100, 255],1);
+            {x:face.x,y:face.y-90},1,1,[100, 255, 100, 255],1);
             
             
         cv.putText(dst,   
             String( dataset_dict['hair_id'][parseInt(predictions[3].dataSync())])+
             ", "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())]) +", ",
-            {x:face.x-60,y:face.y-80},1,1,[100, 255, 100, 255],1);
+            {x:face.x,y:face.y-80},1,1,[100, 255, 100, 255],1);
 
         cv.putText(dst,
             String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())]),
-            {x:face.x-60,y:face.y-50},1,1,[100, 255, 100, 255],1);
+            {x:face.x,y:face.y-70},1,1,[100, 255, 100, 255],1);
         
     }catch(err){
         if (modelLoaded==true){
