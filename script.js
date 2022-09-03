@@ -93,8 +93,8 @@ function openCvReady() {
         if (w < 700){
             //this.video_width=480;
             //this.video_height=640;
-            video.setAttribute('width', 240);
-            video.setAttribute('height', 320);
+            video.setAttribute('width', 480);
+            video.setAttribute('height', 640);
         }else{
             video.setAttribute('width', width);
             video.setAttribute('height', height);
