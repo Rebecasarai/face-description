@@ -291,6 +291,9 @@ setTimeout(processVideo, 0);
 
 window.addEventListener("click", function(event) {
 
+    if (event.detail === 3) {
+    
+
     let texto = "No se ha detectado caras recientemente."
     if (predictions !== ''){
         texto = String(dataset_dict['gender_id'][parseInt(predictions[2].argMax(1).dataSync())])+
@@ -310,4 +313,7 @@ window.addEventListener("click", function(event) {
          alert("¡Lo sentimos, su navegador no admite texto a voz!");
        }
     }
-});
+}
+    
+}
+);
