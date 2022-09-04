@@ -175,7 +175,7 @@ var modelLoaded = false;
 (async () => {
     this.tts=createTts()
     speak(this.tts, "Cargando modelo");
-    model = await tf.loadLayersModel('./model/latest_31_08_2022_small_2_quantize_uint16/model.json')//.then(() => {
+    model = await tf.loadLayersModel('./model/latest_31_08_2022_small_3_quantize_uint16/model.json')//.then(() => {
         
     console.log(tf.getBackend());
     //tf.setBackend('cpu');
