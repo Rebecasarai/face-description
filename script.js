@@ -307,7 +307,7 @@ window.addEventListener("click", function(event) {
         if (this.tts == null){
             //this.tts = createTts();
             this.tts = new SpeechSynthesisUtterance();
-            msg.lang = 'es-ES';
+            this.tts.lang = 'es-ES';
         }
 
         // Speech Synthesis supported 
