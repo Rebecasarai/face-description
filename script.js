@@ -311,9 +311,10 @@ window.addEventListener("click", function(event) {
         }
 
         // Speech Synthesis supported 
-        this.tts.text = texto;        
+        //this.tts.text = texto;        
         //window.speechSynthesis.lang = 'es-ES';
-        window.speechSynthesis.speak(tts);
+        //window.speechSynthesis.speak(this.tts);
+        speak(this.tts,texto)
        }else{
          // Speech Synthesis Not Supported 
          alert("¡Lo sentimos, su navegador no admite texto a voz!");
