@@ -291,7 +291,7 @@ setTimeout(processVideo, 0);
 
 window.addEventListener("click", function(event) {
 
-    //if (event.detail === 3) {
+    if (event.detail === 3) {
     
 
     let texto = "No se ha detectado caras recientemente."
@@ -305,9 +305,9 @@ window.addEventListener("click", function(event) {
         
     if ('speechSynthesis' in window) {
         if (this.tts == null){
-            //this.tts = createTts();
-            this.tts = new SpeechSynthesisUtterance();
-            this.tts.lang = 'es-ES';
+            this.tts = createTts();
+            //this.tts = new SpeechSynthesisUtterance();
+            //this.tts.lang = 'es-ES';
         }
 
         // Speech Synthesis supported 
@@ -322,5 +322,5 @@ window.addEventListener("click", function(event) {
     }
 }
     
-//}
+}
 );
