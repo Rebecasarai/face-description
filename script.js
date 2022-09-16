@@ -304,6 +304,10 @@ window.addEventListener("click", function(event) {
         String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())])
         
     if ('speechSynthesis' in window) {
+        if (this.tts == null){
+            this.tts = createTts();
+        }
+
         // Speech Synthesis supported 
         this.tts.text = texto;        
         //window.speechSynthesis.lang = 'es-ES';
