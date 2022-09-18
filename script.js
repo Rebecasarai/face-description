@@ -291,7 +291,7 @@ setTimeout(processVideo, 0);
 
 window.addEventListener("click", function(event) {
 
-    if (event.detail === 3) {
+    //if (event.detail === 3) {
     
 
     let texto = "No se ha detectado caras recientemente."
@@ -320,7 +320,7 @@ window.addEventListener("click", function(event) {
          alert("¡Lo sentimos, su navegador no admite texto a voz!");
        }
     }
-}
+//}
     
 }
 );
