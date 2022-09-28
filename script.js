@@ -319,6 +319,18 @@ window.addEventListener("click", function(event) {
          // Speech Synthesis Not Supported 
          alert("¡Lo sentimos, su navegador no admite texto a voz!");
        }
+    } else{
+        if (this.tts == null){
+            this.tts = createTts();
+            //this.tts = new SpeechSynthesisUtterance();
+            //this.tts.lang = 'es-ES';
+        }
+
+        // Speech Synthesis supported 
+        //this.tts.text = texto;        
+        //window.speechSynthesis.lang = 'es-ES';
+        //window.speechSynthesis.speak(this.tts);
+        speak(this.tts, "Cargando modelo, espero un par de segundos por favor.")
     }
 //}
     
