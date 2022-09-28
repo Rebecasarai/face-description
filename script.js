@@ -330,7 +330,7 @@ window.addEventListener("click", function(event) {
         //this.tts.text = texto;        
         //window.speechSynthesis.lang = 'es-ES';
         //window.speechSynthesis.speak(this.tts);
-        speak(this.tts, "Cargando modelo, espero un par de segundos por favor.")
+        speak(this.tts, "Cargando modelo, espere un par de segundos por favor.")
     }
 //}
     
