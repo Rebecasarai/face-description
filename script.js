@@ -86,9 +86,9 @@ function openCvReady() {
         var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
         var h = (window.innerHeight > 0) ? window.innerHeight : screen.height;
         console.log("width: "+w);
-        alert("wxh:"+ w+"x"+h+".  clientWidth x clientHeight:"+
+        /*alert("wxh:"+ w+"x"+h+".  clientWidth x clientHeight:"+
                 video.clientWidth+"x"+video.clientHeight+".  scrollWidth x scrollHeight:"+
-                video.scrollWidth+"x"+video.scrollHeight +".\n cameraWidth x cameraHeight:"+width+"x"+height);
+                video.scrollWidth+"x"+video.scrollHeight +".\n cameraWidth x cameraHeight:"+width+"x"+height);*/
 
         if (w < 700){
             //this.video_width=480;
