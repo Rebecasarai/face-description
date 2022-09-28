@@ -292,6 +292,21 @@ setTimeout(processVideo, 0);
 
 window.addEventListener("click", function(event) {
 
+
+    if(modelLoaded==False){
+        if (this.tts == null){
+            this.tts = createTts();
+            //this.tts = new SpeechSynthesisUtterance();
+            //this.tts.lang = 'es-ES';
+        }
+
+        // Speech Synthesis supported 
+        //this.tts.text = texto;        
+        //window.speechSynthesis.lang = 'es-ES';
+        //window.speechSynthesis.speak(this.tts);
+        speak(this.tts, "Cargando modelo, espero un par de segundos por favor.")
+    }
+
     //if (event.detail === 3) {
     
 
@@ -331,8 +346,10 @@ window.addEventListener("click", function(event) {
         //this.tts.text = texto;        
         //window.speechSynthesis.lang = 'es-ES';
         //window.speechSynthesis.speak(this.tts);
-        speak(this.tts, "Cargando modelo, espero un par de segundos por favor.")
+        speak(this.tts, "No han habido rostros detectados recientemente.")
     }
+    
+    
 //}
     
 }
