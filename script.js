@@ -73,10 +73,7 @@ function openCvReady() {
     
     
     // navigator.mediaDevices.getUserMedia is used to access the webcam
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false, 
-        advanced: [{
-        facingMode: "environment"
-        }] 
+    navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"}, audio: false, 
     })
     .then(function(stream) {
         video.srcObject = stream;
@@ -304,7 +301,7 @@ window.addEventListener("click", function(event) {
         " de "+ String(dataset_dict['age_id'][parseInt(predictions[0].argMax(1).dataSync())]) +
         ", " + String(dataset_dict['expression_id'][parseInt(predictions[1].argMax(1).dataSync())]) +", con " +       
         String( dataset_dict['hair_id'][parseInt(predictions[3].dataSync())])+
-        ", "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())]) +", "+
+        ", "+ String( dataset_dict['bald_id'][parseInt(predictions[4].dataSync())]) +", "
         String( dataset_dict['eyeglasses_id'][parseInt(predictions[5].dataSync())])
         
     if ('speechSynthesis' in window) {
