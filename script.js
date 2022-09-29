@@ -293,7 +293,7 @@ setTimeout(processVideo, 0);
 window.addEventListener("click", function(event) {
 
 
-    if(modelLoaded==False){
+    if(modelLoaded==false){
         if (this.tts == null){
             this.tts = createTts();
             //this.tts = new SpeechSynthesisUtterance();
