@@ -73,8 +73,8 @@ function openCvReady() {
     
     
     // navigator.mediaDevices.getUserMedia is used to access the webcam
-    navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"}, audio: false, 
-    })
+    //navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"}, audio: false,  })
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(function(stream) {
         video.srcObject = stream;
         let {width, height} = stream.getTracks()[0].getSettings();
